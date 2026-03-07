@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
+const repoName = process.env.GITHUB_REPOSITORY?.split('/')[1]
+const pagesBase =
+  process.env.GITHUB_ACTIONS === 'true' && repoName ? `/${repoName}/` : '/'
+
 export default defineConfig({
   plugins: [
     react(),
@@ -12,7 +16,7 @@ export default defineConfig({
       webp: { lossless: false, quality: 75 },
     }),
   ],
-  base: '/Portfolio-Site/',
+  base: pagesBase,
   build: {
     rollupOptions: {
       output: {
