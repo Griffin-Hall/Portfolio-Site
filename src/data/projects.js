@@ -67,7 +67,7 @@ const projects = [
       'Dashboard UI',
     ],
     category: 'AI & Data',
-    liveUrl: null,
+    liveUrl: 'https://griffin-hall.github.io/support-triage-ai-dashboard/',
     repoUrl: null,
   },
   {
