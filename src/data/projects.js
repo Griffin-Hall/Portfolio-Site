@@ -34,6 +34,32 @@ import scTSStats from '../../Photos/SierraChart-C++/TS-Stats-SC-C++.png'
  */
 const projects = [
   {
+    title: 'AI Support Dashboard',
+    description:
+      'AI-powered support operations workspace with smart triage, suggested responses, and conversation context in one view.',
+    fullDescription:
+      'AI Support Dashboard is a customer support operations interface designed to reduce response time and improve consistency across high-volume conversations.\n\nThe dashboard centralizes ticket context, highlights urgency and intent signals, and proposes draft responses so agents can review and send faster. It combines AI-assisted ranking, reusable workflows, and clear operator controls so humans stay in charge while routine analysis is automated.\n\nBuilt as an interaction-first web product, it focuses on fast decision loops, clean state transitions, and practical tooling for real support teams handling production workloads.',
+    image: gsImg2,
+    gallery: [gsImg2, gsImg3, gsImg4, gsImg5],
+    highlights: [
+      'AI-assisted triage to prioritize urgent and high-impact conversations',
+      'Draft response generation with human approval before send',
+      'Context panel combining thread history, metadata, and status signals',
+      'Workflow-oriented UI for quick handoff, escalation, and resolution',
+      'Designed for high-volume support queues with low-friction navigation',
+    ],
+    tags: [
+      'React',
+      'AI Workflows',
+      'Dashboard UI',
+      'Agent Assist',
+      'Operations Tooling',
+    ],
+    category: 'AI & Data',
+    liveUrl: null,
+    repoUrl: null,
+  },
+  {
     title: 'GlobeSense',
     description:
       'AI-driven travel discovery platform — search destinations in natural language and get ranked results via vector similarity instead of keyword matching.',
@@ -60,7 +86,7 @@ const projects = [
       'AI Search',
     ],
     category: 'AI & Data',
-    liveUrl: 'https://griffin-hall.github.io/WebProject-AI/',
+    liveUrl: 'https://griffin-hall.github.io/GlobeSense-AI-Website/',
     repoUrl: null,
   },
   {
