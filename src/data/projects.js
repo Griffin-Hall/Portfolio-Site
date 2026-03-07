@@ -19,6 +19,9 @@ import scLiqMap from '../../Photos/SierraChart-C++/LiqMap-SC-C++.png'
 import scGlyph from '../../Photos/SierraChart-C++/Glyph-SC-C++.png'
 import scMarketMaking from '../../Photos/SierraChart-C++/MarketMaking-Engine-C++.png'
 import scTSStats from '../../Photos/SierraChart-C++/TS-Stats-SC-C++.png'
+import aiCx1 from '../../Photos/Ai-CX-Dashboard/DashboardImage1.png'
+import aiCx2 from '../../Photos/Ai-CX-Dashboard/DashboardImage2.png'
+import aiCx3 from '../../Photos/Ai-CX-Dashboard/DashboardImage3.png'
 
 /**
  * Projects data - edit this array to add/update/remove projects.
@@ -36,24 +39,32 @@ const projects = [
   {
     title: 'AI Support Dashboard',
     description:
-      'AI-powered support operations workspace with smart triage, suggested responses, and conversation context in one view.',
+      'Support Triage Cloud is an AI-assisted support operations dashboard for classifying tickets, routing priority queues, drafting responses, and tracking team performance in real time.',
     fullDescription:
-      'AI Support Dashboard is a customer support operations interface designed to reduce response time and improve consistency across high-volume conversations.\n\nThe dashboard centralizes ticket context, highlights urgency and intent signals, and proposes draft responses so agents can review and send faster. It combines AI-assisted ranking, reusable workflows, and clear operator controls so humans stay in charge while routine analysis is automated.\n\nBuilt as an interaction-first web product, it focuses on fast decision loops, clean state transitions, and practical tooling for real support teams handling production workloads.',
-    image: gsImg2,
-    gallery: [gsImg2, gsImg3, gsImg4, gsImg5],
+      'Support Triage Cloud is a full-stack customer-support workspace built for fast, high-volume triage. Agents can review a live ticket queue, open a structured ticket workspace, run AI analysis for category and priority, edit an AI-generated draft, and send a final reply that closes the ticket and updates reporting metrics.\n\nThe platform uses a React + TypeScript frontend and an Express + Prisma backend with SQLite for demo mode. AI classification supports provider-based analysis (OpenAI/Gemini/Kimi) with robust keyword fallback when providers are unavailable. Each ticket is routed into a primary queue (Urgent, Billing, Technical, Sales, Misc) using deterministic category/priority rules, with Needs Review flags for ambiguous fallback cases. A dedicated KPI/Stats page reports ticket closure throughput, AI draft usage, and daily ticket trends, including deterministic demo-mode volume simulation for realistic dashboard behavior.\n\nThe experience focuses on fast triage loops, reliable fallback behavior, and clear agent workflows that keep humans in control while reducing routine response overhead.',
+    image: aiCx1,
+    gallery: [aiCx1, aiCx2, aiCx3],
     highlights: [
-      'AI-assisted triage to prioritize urgent and high-impact conversations',
-      'Draft response generation with human approval before send',
-      'Context panel combining thread history, metadata, and status signals',
-      'Workflow-oriented UI for quick handoff, escalation, and resolution',
-      'Designed for high-volume support queues with low-friction navigation',
+      'AI-assisted triage pipeline for category, priority, and draft reply generation',
+      'Queue-based routing logic with live counts across Urgent, Billing, Technical, Sales, and Misc',
+      'Agent workspace separating customer message, AI analysis, AI draft, and final reply',
+      'Fallback-safe behavior with Needs Review handling when AI providers fail or are unavailable',
+      'KPI/Stats dashboard for closures, AI draft usage, and daily created vs closed trend charts',
+      'Real-time UX updates after analyze, regenerate, and send reply actions',
     ],
     tags: [
       'React',
-      'AI Workflows',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'Express.js',
+      'Prisma ORM',
+      'SQLite',
+      'OpenAI',
+      'Gemini',
+      'Kimi',
+      'AI Triage',
       'Dashboard UI',
-      'Agent Assist',
-      'Operations Tooling',
     ],
     category: 'AI & Data',
     liveUrl: null,
