@@ -16,6 +16,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
 
   return (
     <div
+      data-flashlight-reactive="panel"
       className="group glass rounded-2xl overflow-hidden fade-up relative flex flex-col"
       style={{ ...style, willChange: 'transform' }}
       onMouseMove={onMouseMove}
@@ -34,6 +35,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
 
       {/* Image — fixed aspect ratio, same on every card */}
       <div
+        data-flashlight-reactive="media"
         className="relative aspect-[4/3] bg-dark-800 overflow-hidden cursor-pointer flex-shrink-0"
         onClick={onSelect}
         role="button"
@@ -74,6 +76,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-flashlight-reactive="button"
               onClick={(e) => e.stopPropagation()}
               className="px-4 py-2 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-dark transition-colors"
             >
@@ -85,6 +88,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
               href={repoUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-flashlight-reactive="button"
               onClick={(e) => e.stopPropagation()}
               className="px-4 py-2 rounded-full bg-dark-700 text-white text-sm font-medium hover:bg-dark-600 transition-colors"
             >
@@ -93,6 +97,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
           )}
           <button
             type="button"
+            data-flashlight-reactive="button"
             onClick={(e) => {
               e.stopPropagation()
               onSelect()
@@ -150,6 +155,7 @@ export default function ProjectCard({ project, onSelect = () => {} }) {
           {tags.slice(0, 5).map((tag) => (
             <span
               key={tag}
+              data-flashlight-reactive="button"
               className="text-xs px-2.5 py-1 rounded-full bg-dark-800 text-dark-300 border border-dark-700/30 group-hover:border-accent/20 group-hover:text-dark-200 transition-colors duration-300"
             >
               {tag}

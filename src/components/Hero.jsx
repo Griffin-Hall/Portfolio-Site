@@ -57,6 +57,7 @@ export default function Hero() {
         <div className="flex items-center justify-center gap-4 fade-up">
           <a
             href="#projects"
+            data-flashlight-reactive="button"
             className="group inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-accent hover:bg-accent-dark text-white font-medium transition-all hover:shadow-lg hover:shadow-accent/25 hover:scale-105 active:scale-95"
           >
             {profile.hero.cta}

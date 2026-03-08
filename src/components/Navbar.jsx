@@ -52,12 +52,24 @@ export default function Navbar({
                 {link.label}
               </a>
               {link.label === 'Projects' && (
-                <FlashlightToggle
-                  enabled={flashlightEnabled}
-                  disabled={!flashlightAvailable}
-                  onToggle={onToggleFlashlight}
-                  title={flashlightHint}
-                />
+                <div className="flex items-center gap-2">
+                  <FlashlightToggle
+                    enabled={flashlightEnabled}
+                    disabled={!flashlightAvailable}
+                    onToggle={onToggleFlashlight}
+                    title={flashlightHint}
+                  />
+                  <span
+                    data-flashlight-reactive="button"
+                    className={`hidden overflow-hidden whitespace-nowrap rounded-full border text-[10px] font-semibold uppercase tracking-[0.32em] transition-all duration-300 lg:inline-flex ${
+                      flashlightEnabled
+                        ? 'max-w-40 border-accent/40 bg-accent/10 px-3 py-1 text-accent-light opacity-100 shadow-[0_0_18px_rgba(99,102,241,0.16)]'
+                        : 'max-w-0 border-transparent bg-transparent px-0 py-1 text-transparent opacity-0'
+                    }`}
+                  >
+                    Flashlight On
+                  </span>
+                </div>
               )}
             </li>
           ))}
@@ -109,7 +121,9 @@ export default function Navbar({
           <div className="flex items-center justify-between rounded-full border border-dark-700/60 bg-dark-900/50 px-4 py-2.5">
             <div>
               <p className="text-sm font-medium text-dark-200">Flashlight Mode</p>
-              <p className="text-xs text-dark-500">{flashlightHint}</p>
+              <p className="text-xs text-dark-500">
+                {flashlightEnabled ? 'Flashlight On' : flashlightHint}
+              </p>
             </div>
             <FlashlightToggle
               enabled={flashlightEnabled}

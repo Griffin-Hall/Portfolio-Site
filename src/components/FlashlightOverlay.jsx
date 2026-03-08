@@ -10,6 +10,7 @@ export default function FlashlightOverlay({ enabled, supported }) {
         enabled ? 'opacity-100' : 'opacity-0'
       }`}
     >
+      <div className="flashlight-filter absolute inset-0" />
       <div className="flashlight-overlay absolute inset-0" />
       <div className="flashlight-glow absolute inset-0" />
     </div>
