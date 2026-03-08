@@ -8,24 +8,14 @@ import Footer from './components/Footer'
 import FlashlightOverlay from './components/FlashlightOverlay'
 
 function getFlashlightAvailability() {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return {
-      supported: false,
-      reason: 'Mouse or trackpad required.',
-    }
-  }
-
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
     return {
       supported: false,
       reason: 'Unavailable with reduced motion.',
-    }
-  }
-
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    return {
-      supported: false,
-      reason: 'Mouse or trackpad required.',
     }
   }
 
@@ -50,7 +40,6 @@ export default function App() {
   useEffect(() => {
     const rootStyle = document.documentElement.style
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const finePointerQuery = window.matchMedia('(hover: hover) and (pointer: fine)')
 
     const syncFlashlightVars = (x, y) => {
       rootStyle.setProperty('--flashlight-x', `${x}px`)
@@ -71,14 +60,6 @@ export default function App() {
         setFlashlightAvailability({
           supported: false,
           reason: 'Unavailable with reduced motion.',
-        })
-        return
-      }
-
-      if (!finePointerQuery.matches) {
-        setFlashlightAvailability({
-          supported: false,
-          reason: 'Mouse or trackpad required.',
         })
         return
       }
@@ -114,9 +95,9 @@ export default function App() {
     updateAvailability()
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('pointerdown', handlePointerMove, { passive: true })
     window.addEventListener('resize', handleResize)
     reducedMotionQuery.addEventListener('change', updateAvailability)
-    finePointerQuery.addEventListener('change', updateAvailability)
 
     const animate = () => {
       currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.065
@@ -141,9 +122,9 @@ export default function App() {
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerdown', handlePointerMove)
       window.removeEventListener('resize', handleResize)
       reducedMotionQuery.removeEventListener('change', updateAvailability)
-      finePointerQuery.removeEventListener('change', updateAvailability)
       cancelAnimationFrame(rafRef.current)
       rootStyle.removeProperty('--flashlight-x')
       rootStyle.removeProperty('--flashlight-y')
