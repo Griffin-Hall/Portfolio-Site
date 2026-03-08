@@ -8,17 +8,6 @@ import Footer from './components/Footer'
 import FlashlightOverlay from './components/FlashlightOverlay'
 
 function getFlashlightAvailability() {
-  if (
-    typeof window !== 'undefined' &&
-    typeof window.matchMedia === 'function' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  ) {
-    return {
-      supported: false,
-      reason: 'Unavailable with reduced motion.',
-    }
-  }
-
   return {
     supported: true,
     reason: 'Toggle flashlight mode.',
@@ -32,6 +21,7 @@ export default function App() {
   const currentPos = useRef({ x: 0, y: 0 })
   const flashlightPos = useRef({ x: 0, y: 0 })
   const rafRef = useRef(null)
+  const reducedMotionRef = useRef(false)
   const [flashlightEnabled, setFlashlightEnabled] = useState(false)
   const [flashlightAvailability, setFlashlightAvailability] = useState(
     getFlashlightAvailability
@@ -56,14 +46,7 @@ export default function App() {
     }
 
     const updateAvailability = () => {
-      if (reducedMotionQuery.matches) {
-        setFlashlightAvailability({
-          supported: false,
-          reason: 'Unavailable with reduced motion.',
-        })
-        return
-      }
-
+      reducedMotionRef.current = reducedMotionQuery.matches
       setFlashlightAvailability({
         supported: true,
         reason: 'Toggle flashlight mode.',
@@ -100,10 +83,15 @@ export default function App() {
     reducedMotionQuery.addEventListener('change', updateAvailability)
 
     const animate = () => {
-      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.065
-      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * 0.065
-      flashlightPos.current.x += (targetPos.current.x - flashlightPos.current.x) * 0.24
-      flashlightPos.current.y += (targetPos.current.y - flashlightPos.current.y) * 0.24
+      if (reducedMotionRef.current) {
+        currentPos.current = { ...targetPos.current }
+        flashlightPos.current = { ...targetPos.current }
+      } else {
+        currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.065
+        currentPos.current.y += (targetPos.current.y - currentPos.current.y) * 0.065
+        flashlightPos.current.x += (targetPos.current.x - flashlightPos.current.x) * 0.24
+        flashlightPos.current.y += (targetPos.current.y - flashlightPos.current.y) * 0.24
+      }
 
       if (spotlightRef.current) {
         const cx = currentPos.current.x
