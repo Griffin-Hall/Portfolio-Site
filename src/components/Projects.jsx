@@ -34,7 +34,6 @@ export default function Projects() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                data-flashlight-reactive="button"
                 onClick={() => setActive(cat)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   active === cat
@@ -58,10 +57,7 @@ export default function Projects() {
               />
             ))
           ) : (
-            <div
-              data-flashlight-reactive="panel"
-              className="col-span-full glass rounded-2xl p-8 text-center text-dark-300 border border-dark-700/50 fade-up"
-            >
+            <div className="col-span-full glass rounded-2xl p-8 text-center text-dark-300 border border-dark-700/50 fade-up">
               More projects are on the way. Check back soon.
             </div>
           )}
@@ -114,7 +110,6 @@ function ProjectModal({ project, onClose }) {
       onClick={handleClose}
     >
       <div
-        data-flashlight-reactive="panel"
         className={`relative w-full max-w-7xl bg-dark-900 rounded-3xl border border-dark-700/60 shadow-2xl overflow-hidden transition-all duration-300 ${
           show ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
@@ -123,7 +118,6 @@ function ProjectModal({ project, onClose }) {
       >
         <button
           type="button"
-          data-flashlight-reactive="button"
           onClick={handleClose}
           className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-dark-800 text-dark-300 hover:text-white hover:bg-dark-700 border border-dark-700/60 transition-colors"
           aria-label="Close project details"
@@ -135,10 +129,7 @@ function ProjectModal({ project, onClose }) {
         <div className="flex flex-col md:flex-row h-full">
 
           {/* Left: image viewer — fills full height on desktop */}
-          <div
-            data-flashlight-reactive="media"
-            className="md:w-[58%] flex flex-col bg-dark-900 border-b md:border-b-0 md:border-r border-dark-700/50"
-          >
+          <div className="md:w-[58%] flex flex-col bg-dark-900 border-b md:border-b-0 md:border-r border-dark-700/50">
             {/* object-contain: full screenshot visible, dark bg fills the rest */}
             <div className="flex-1 min-h-0 flex items-center justify-center bg-dark-900 overflow-hidden" style={{ minHeight: '260px' }}>
               <img
@@ -155,7 +146,6 @@ function ProjectModal({ project, onClose }) {
                   <button
                     key={src}
                     type="button"
-                    data-flashlight-reactive="button"
                     onClick={() => setActiveImage(src)}
                     className={`h-16 w-24 rounded-md overflow-hidden border-2 transition-all flex-shrink-0 ${
                       activeImage === src
@@ -205,7 +195,6 @@ function ProjectModal({ project, onClose }) {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-flashlight-reactive="button"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-dark transition-colors"
                   >
                     Live Demo
@@ -216,7 +205,6 @@ function ProjectModal({ project, onClose }) {
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-flashlight-reactive="button"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-800 text-white text-sm font-medium hover:bg-dark-700 transition-colors border border-dark-700/60"
                   >
                     Source Code
@@ -244,7 +232,6 @@ function ProjectModal({ project, onClose }) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    data-flashlight-reactive="button"
                     className="px-3 py-1.5 text-xs rounded-full bg-dark-800 text-dark-200 border border-dark-700/60"
                   >
                     {tag}

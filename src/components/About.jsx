@@ -32,7 +32,6 @@ export default function About() {
                 {profile.about.skills.map((skill) => (
                   <span
                     key={skill}
-                    data-flashlight-reactive="button"
                     className="px-3 py-1.5 text-sm rounded-full bg-dark-800 text-dark-200 border border-dark-700/50 hover:border-accent/40 hover:text-accent-light hover:scale-105 hover:shadow-lg hover:shadow-accent/10 transition-all duration-300 cursor-default"
                   >
                     {skill}
@@ -46,7 +45,6 @@ export default function About() {
                 href={profile.about.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-flashlight-reactive="button"
                 className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-full border border-dark-600 text-dark-200 hover:border-accent hover:text-white transition-all fade-up"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

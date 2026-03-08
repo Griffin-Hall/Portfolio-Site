@@ -27,7 +27,6 @@ export default function Toolkit({ categories }) {
         {categories.map((cat, i) => (
           <button
             key={cat.category}
-            data-flashlight-reactive="button"
             onClick={() => { setActiveCategory(i); setHoveredItem(null) }}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
               activeCategory === i
@@ -46,7 +45,6 @@ export default function Toolkit({ categories }) {
         {categories[activeCategory].items.map((item, i) => (
           <div
             key={item.name}
-            data-flashlight-reactive="panel"
             onMouseEnter={() => setHoveredItem(item.name)}
             onMouseLeave={() => setHoveredItem(null)}
             className={`relative p-4 rounded-xl border transition-all duration-500 cursor-default overflow-hidden ${

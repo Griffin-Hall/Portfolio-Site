@@ -20,9 +20,6 @@ export default function App() {
   const targetPos = useRef({ x: 0, y: 0 })
   const currentPos = useRef({ x: 0, y: 0 })
   const flashlightPos = useRef({ x: 0, y: 0 })
-  const beamBiasTarget = useRef({ x: 0, y: 0 })
-  const beamBiasCurrent = useRef({ x: 0, y: 0 })
-  const lastPointerRef = useRef({ x: 0, y: 0 })
   const rafRef = useRef(null)
   const reducedMotionRef = useRef(false)
   const [flashlightEnabled, setFlashlightEnabled] = useState(false)
@@ -34,11 +31,9 @@ export default function App() {
     const rootStyle = document.documentElement.style
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-    const syncFlashlightVars = (x, y, biasX, biasY) => {
+    const syncFlashlightVars = (x, y) => {
       rootStyle.setProperty('--flashlight-x', `${x}px`)
       rootStyle.setProperty('--flashlight-y', `${y}px`)
-      rootStyle.setProperty('--flashlight-bias-x', `${biasX}px`)
-      rootStyle.setProperty('--flashlight-bias-y', `${biasY}px`)
     }
 
     const centerPointer = () => {
@@ -47,10 +42,7 @@ export default function App() {
       targetPos.current = { x, y }
       currentPos.current = { x, y }
       flashlightPos.current = { x, y }
-      beamBiasTarget.current = { x: 0, y: 0 }
-      beamBiasCurrent.current = { x: 0, y: 0 }
-      lastPointerRef.current = { x, y }
-      syncFlashlightVars(x, y, 0, 12)
+      syncFlashlightVars(x, y)
     }
 
     const updateAvailability = () => {
@@ -62,20 +54,7 @@ export default function App() {
     }
 
     const handlePointerMove = (event) => {
-      const nextPos = { x: event.clientX, y: event.clientY }
-      const dx = nextPos.x - lastPointerRef.current.x
-      const dy = nextPos.y - lastPointerRef.current.y
-      const distance = Math.hypot(dx, dy)
-
-      if (distance > 0.5) {
-        beamBiasTarget.current = {
-          x: Math.max(-1, Math.min(1, dx / distance)),
-          y: Math.max(-1, Math.min(1, dy / distance)),
-        }
-      }
-
-      targetPos.current = nextPos
-      lastPointerRef.current = nextPos
+      targetPos.current = { x: event.clientX, y: event.clientY }
     }
 
     const handleResize = () => {
@@ -92,12 +71,7 @@ export default function App() {
         x: clamp(flashlightPos.current.x, window.innerWidth),
         y: clamp(flashlightPos.current.y, window.innerHeight),
       }
-      syncFlashlightVars(
-        flashlightPos.current.x,
-        flashlightPos.current.y,
-        beamBiasCurrent.current.x * 48,
-        beamBiasCurrent.current.y * 34 + 12
-      )
+      syncFlashlightVars(flashlightPos.current.x, flashlightPos.current.y)
     }
 
     centerPointer()
@@ -112,16 +86,11 @@ export default function App() {
       if (reducedMotionRef.current) {
         currentPos.current = { ...targetPos.current }
         flashlightPos.current = { ...targetPos.current }
-        beamBiasCurrent.current = { ...beamBiasTarget.current }
       } else {
         currentPos.current.x += (targetPos.current.x - currentPos.current.x) * 0.065
         currentPos.current.y += (targetPos.current.y - currentPos.current.y) * 0.065
         flashlightPos.current.x += (targetPos.current.x - flashlightPos.current.x) * 0.24
         flashlightPos.current.y += (targetPos.current.y - flashlightPos.current.y) * 0.24
-        beamBiasTarget.current.x *= 0.92
-        beamBiasTarget.current.y *= 0.92
-        beamBiasCurrent.current.x += (beamBiasTarget.current.x - beamBiasCurrent.current.x) * 0.14
-        beamBiasCurrent.current.y += (beamBiasTarget.current.y - beamBiasCurrent.current.y) * 0.14
       }
 
       if (spotlightRef.current) {
@@ -133,12 +102,7 @@ export default function App() {
         ].join(', ')
       }
 
-      syncFlashlightVars(
-        flashlightPos.current.x,
-        flashlightPos.current.y,
-        beamBiasCurrent.current.x * 48,
-        beamBiasCurrent.current.y * 34 + 12
-      )
+      syncFlashlightVars(flashlightPos.current.x, flashlightPos.current.y)
       rafRef.current = requestAnimationFrame(animate)
     }
 
@@ -152,8 +116,6 @@ export default function App() {
       cancelAnimationFrame(rafRef.current)
       rootStyle.removeProperty('--flashlight-x')
       rootStyle.removeProperty('--flashlight-y')
-      rootStyle.removeProperty('--flashlight-bias-x')
-      rootStyle.removeProperty('--flashlight-bias-y')
     }
   }, [])
 
@@ -162,15 +124,6 @@ export default function App() {
       setFlashlightEnabled(false)
     }
   }, [flashlightAvailability.supported, flashlightEnabled])
-
-  useEffect(() => {
-    const root = document.documentElement
-    root.dataset.flashlightMode = flashlightEnabled ? 'on' : 'off'
-
-    return () => {
-      delete root.dataset.flashlightMode
-    }
-  }, [flashlightEnabled])
 
   // Scroll-triggered fade-up animations.
   useEffect(() => {

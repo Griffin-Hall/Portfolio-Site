@@ -9,7 +9,6 @@ export default function FlashlightToggle({
       type="button"
       onClick={onToggle}
       disabled={disabled}
-      data-flashlight-reactive="button"
       aria-label={enabled ? 'Turn flashlight mode off' : 'Turn flashlight mode on'}
       aria-pressed={enabled}
       title={title}
