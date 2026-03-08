@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import FlashlightToggle from './FlashlightToggle'
 
 const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Projects', href: '#projects' },
 ]
 
-export default function Navbar() {
+export default function Navbar({
+  flashlightEnabled,
+  flashlightAvailable,
+  flashlightHint,
+  onToggleFlashlight,
+}) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -35,20 +41,31 @@ export default function Navbar() {
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <li key={link.href}>
+            <li
+              key={link.href}
+              className={link.label === 'Projects' ? 'flex items-center gap-3' : ''}
+            >
               <a
                 href={link.href}
                 className="text-sm font-medium text-dark-300 hover:text-white transition-colors"
               >
                 {link.label}
               </a>
+              {link.label === 'Projects' && (
+                <FlashlightToggle
+                  enabled={flashlightEnabled}
+                  disabled={!flashlightAvailable}
+                  onToggle={onToggleFlashlight}
+                  title={flashlightHint}
+                />
+              )}
             </li>
           ))}
-
         </ul>
 
         {/* Mobile hamburger */}
         <button
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden flex flex-col gap-1.5 p-2"
           aria-label="Toggle menu"
@@ -74,7 +91,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? 'max-h-64' : 'max-h-0'
+          menuOpen ? 'max-h-72' : 'max-h-0'
         }`}
       >
         <div className="section-container py-4 flex flex-col gap-4">
@@ -89,6 +106,18 @@ export default function Navbar() {
             </a>
           ))}
 
+          <div className="flex items-center justify-between rounded-full border border-dark-700/60 bg-dark-900/50 px-4 py-2.5">
+            <div>
+              <p className="text-sm font-medium text-dark-200">Flashlight Mode</p>
+              <p className="text-xs text-dark-500">{flashlightHint}</p>
+            </div>
+            <FlashlightToggle
+              enabled={flashlightEnabled}
+              disabled={!flashlightAvailable}
+              onToggle={onToggleFlashlight}
+              title={flashlightHint}
+            />
+          </div>
         </div>
       </div>
     </nav>
