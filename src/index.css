@@ -67,35 +67,36 @@
 
   .flashlight-overlay {
     background: radial-gradient(
-      circle clamp(17rem, 29vw, 23rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
+      circle clamp(20rem, 34vw, 28rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
       rgba(3, 5, 12, 0) 0,
-      rgba(3, 5, 12, 0) 30%,
-      rgba(3, 5, 12, 0.18) 42%,
-      rgba(3, 5, 12, 0.84) 58%,
-      rgba(1, 2, 6, 0.97) 72%,
-      rgba(0, 0, 0, 0.992) 100%
+      rgba(3, 5, 12, 0) 34%,
+      rgba(3, 5, 12, 0.16) 44%,
+      rgba(3, 5, 12, 0.9) 57%,
+      rgba(0, 0, 0, 0.985) 68%,
+      rgba(0, 0, 0, 0.998) 100%
     );
   }
 
   .flashlight-glow {
     background:
       radial-gradient(
-        circle clamp(11rem, 20vw, 15rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
-        rgba(255, 255, 255, 0.28) 0,
-        rgba(255, 255, 255, 0.16) 18%,
-        rgba(129, 140, 248, 0.12) 34%,
-        rgba(129, 140, 248, 0.04) 48%,
-        transparent 68%
+        circle clamp(14rem, 24vw, 18rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
+        rgba(255, 255, 255, 0.34) 0,
+        rgba(255, 255, 255, 0.19) 20%,
+        rgba(129, 140, 248, 0.14) 38%,
+        rgba(129, 140, 248, 0.05) 54%,
+        transparent 76%
       ),
       radial-gradient(
-        circle clamp(18rem, 30vw, 24rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
-        rgba(99, 102, 241, 0.08) 0,
-        rgba(99, 102, 241, 0.04) 28%,
-        transparent 58%
+        circle clamp(23rem, 38vw, 31rem) at var(--flashlight-x, 50vw) var(--flashlight-y, 50vh),
+        rgba(99, 102, 241, 0.09) 0,
+        rgba(99, 102, 241, 0.05) 26%,
+        rgba(99, 102, 241, 0.02) 44%,
+        transparent 66%
       );
     mix-blend-mode: screen;
-    opacity: 0.95;
-    filter: saturate(1.08) brightness(1.04);
+    opacity: 1;
+    filter: saturate(1.1) brightness(1.08);
   }
 
   .fade-up {
